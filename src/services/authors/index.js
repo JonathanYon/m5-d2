@@ -36,7 +36,7 @@ authorsRouter.put("/:authorId", (req, res) => {
     const authors = JSON.parse(fs.readFileSync(jsonPath))
     const allAuthors = authors.filter(author => author.id !== req.params.authorId)
     const updateAuthor = {...req.body, id: req.params.authorId}
-    authors.push(updateAuthor)
+    allAuthors.push(updateAuthor)
     fs.writeFileSync(jsonPath, JSON.stringify(allAuthors))
     res.send(updateAuthor)
 })
