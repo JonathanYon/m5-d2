@@ -29,7 +29,7 @@ authorsRouter.post("/", (req, res) => {
   const authors = JSON.parse(fs.readFileSync(jsonPath));
   authors.push(newauthor);
   fs.writeFileSync(jsonPath, JSON.stringify(authors));
-  res.status(200).send({ id: newauthor.id });
+  res.status(201).send({ id: newauthor.id });
 });
 
 authorsRouter.put("/:authorId", (req, res) => {
