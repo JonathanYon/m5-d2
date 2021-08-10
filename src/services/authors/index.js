@@ -1,7 +1,8 @@
-import express from "express";
+import express, { json } from "express";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import fs from "fs"
+import uniqid from "uniqid"
 
 
 
@@ -18,13 +19,33 @@ authorsRouter.get("/", (req, res) => {
 
 authorsRouter.get("/:authorId", (req, res) => {
     const authors = JSON.parse(fs.readFileSync(jsonPath))
-    const author = authors.find(s => s.id === req.params.authorId)
+    const author = authors.find(s => s.id = req.params.authorId)
+    res.send(author)
 })
 
-authorsRouter.post("/", (req, res) => {})
+authorsRouter.post("/", (req, res) => {
+    // console.log(req.body)
+    const newauthor = { ...req.body, id: uniqid(), createdAt: new Date() }
+    const authors = JSON.parse(fs.readFileSync(jsonPath))
+    authors.push(newauthor)
+    fs.writeFileSync(jsonPath, JSON.stringify(authors))
+    res.status(200).send({id: newauthor.id})
+})
 
-authorsRouter.put("/:authorId", (req, res) => {})
+authorsRouter.put("/:authorId", (req, res) => {
+    const authors = JSON.parse(fs.readFileSync(jsonPath))
+    const allAuthors = authors.filter(author => author.id !== req.params.authorId)
+    const updateAuthor = {...req.body, id: req.params.authorId}
+    authors.push(updateAuthor)
+    fs.writeFileSync(jsonPath, JSON.stringify(allAuthors))
+    res.send(updateAuthor)
+})
 
-authorsRouter.delete("/:authorId", (req, res) => {})
+authorsRouter.delete("/:authorId", (req, res) => {
+   const authors = JSON.parse(fs.readFileSync(jsonPath))
+   const allAuthors = authors.filter(author => author.id !== req.params.authorId)
+   fs.writeFileSync(jsonPath, JSON.stringify(allAuthors))
+   res.status(204).send()
+})
 
 export default authorsRouter
