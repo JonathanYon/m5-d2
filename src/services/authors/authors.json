@@ -1,21 +1,5 @@
 [
     {
-        "id": 1,
-        "name": "Riccardo",
-        "surname": "Stefano",
-        "email": "ric@yahoo.com",
-        "date of birth": "2000/01/01",
-        "avatar": "http://ui-avatars.com/api/?name=John+doe"
-    },
-    {
-        "id": 2,
-        "name": "Riccardo",
-        "surname": "Stefano",
-        "email": "ric@yahoo.com",
-        "date of birth": "2000/01/01",
-        "avatar": "http://ui-avatars.com/api/?name=John+doe"
-    },
-    {
         "name": "yesss",
         "surname": "ddll",
         "email": "john@yahoo.com",
